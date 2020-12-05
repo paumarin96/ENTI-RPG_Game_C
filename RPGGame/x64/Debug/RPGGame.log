@@ -1,2 +1,4 @@
 ﻿  RPGGame.cpp
+C:\Users\Focalita\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\RPGGame.cpp(18,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\Focalita\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\RPGGame.cpp(34,9): warning C4477: 'printf' : la cadena de formato '%s' requiere un argumento de tipo 'char *', pero el argumento variádico 1 tiene el tipo 'const char *(*)[5][5]'
   RPGGame.vcxproj -> C:\Users\Focalita\Documents\GitHub\ENTI-RPG_Game_C\x64\Debug\RPGGame.exe

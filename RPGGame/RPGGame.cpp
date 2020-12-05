@@ -1,31 +1,55 @@
-// RPGGame.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
-
-#include <cassert>
+#include <stdio.h>
 #include <iostream>
-#include <fstream>
-#include <string>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <string.h>
+#include "types.h"
 
-using namespace std;
+#include "Player.h"
+#include "Dungeon.h"
+#define MAP_SIZE 5;
+
+
 
 int main() {
-    unsigned lines = 0;
-    string line_content;
+	
 
-    ifstream r_tftpd_hpa("radev.txt");
-    assert(r_tftpd_hpa);
+	srand(time(NULL));
+	char map[][5] = { {'1', '2', '3','4','5'},
+					   {'1', '2', '3','4','5'},
+					   {'1', '2', '3','4','5'},
+					   {'1', '2', '3','4','5'},
+					   {'1', '2', '3','4','5'}, };
 
-    while (getline(r_tftpd_hpa, line_content)) {
-        lines++;
+	const char *map2[][5][5] = { {" ____ ",  " ____ ",  " ____ ", " ____ ", " ____ "},
+							  {"|    | ", "|    | ", "|    | ","|    | ","|    | "},
+							  {"|    | ", "|    | ", "|    | ","|    | ","|    | "},
+							  {"|    | ", "|    | ", "|    | ","|    | ","|    | "},
+							  {"|____|",  "|____|",  "|____|", "|____|", "|____|"}, };
+	Player player;
+	InitializePlayer(player);
 
-        if (line_content[0] == ' ') { // my failed attempt at catching spaces
-            cout << endl << " " << endl;
-           
-        }
+	bool gameRunning = true;
+	printf("%s", map2); //hacer for para imprimir y provar, no funciona
+	//RenderDungeon(map2);
+	//while (gameRunning) {
+	//	player.agility = 3;
+	//	CreateDungeon(); //We create the map
+	//	if (player.enemiesKilled >= 10) {
+	//		//Radev boss battle
+	//	}
+	//	else {
+	//		while (player.agility != 0) {
+	//			RenderDungeon(map); //We render the map every step. 
+	//			
+	//				player.agility--;
+	//		}
+	//	}
+	//	gameRunning = false;
+	//}
 
-        cout << line_content ;
-       
-    }
+	return 0;
 
-    return 0;
+
 }
