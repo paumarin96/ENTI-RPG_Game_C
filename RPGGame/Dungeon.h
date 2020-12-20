@@ -7,4 +7,4 @@
 void CreateDungeon();
 
 //The map gets rendered.
-void RenderDungeon(char map[][5]);
+void RenderDungeon();
