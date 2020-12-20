@@ -11,11 +11,16 @@ void InitializePlayer(Player& p) {
 }
 
 void Player::ConsumePotion() {
-	potions--;
-	health += ((40 * maxHealth) / 100);
-	if (health > maxHealth) {
-		health = maxHealth;
+	
+	if (potions > 0) {
+		potions--;
+		health += ((40 * maxHealth) / 100);
+
+		if (health > maxHealth) {
+			health = maxHealth;
+		}
 	}
+	
 }
 
 void Player::DamagePlayer(int damage) {

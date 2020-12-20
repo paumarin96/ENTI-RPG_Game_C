@@ -6,7 +6,7 @@ struct MapPosition {
 };
 
 struct Item {
-	char name[500];
+	char name[20];
 	int gold;
 	int healthMod;
 	int staminaMod;

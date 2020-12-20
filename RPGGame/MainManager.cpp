@@ -53,20 +53,23 @@ void MainManager::Dungeon() {
 		player.ConsumePotion();
 		break;
 	case 'W':
-		player.ConsumePotion();
 		break;
 	case 'A':
-		player.ConsumePotion();
 		break;
 	case 'S':
-		player.ConsumePotion();
 		break;
 	case 'D':
+		break;
+	case 'p':
 		player.ConsumePotion();
 		break;
-
-
-	default:
+	case 'w':
+		break;
+	case 'a':
+		break;
+	case 's':
+		break;
+	case 'd':
 		break;
 	}
 	
