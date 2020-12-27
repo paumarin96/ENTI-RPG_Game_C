@@ -17,13 +17,25 @@ struct Player {
 
 	int potions = 3;
 
-	void position(int x, int y) {
-		pos.x = x;
+	bool position(int x, int y) {
+
+		if (x > 4 || x < 0) {
+			
+			return false;
+		} 
+		if (y > 4 || y < 0) {
+			
+			return false;
+		}
+
 		pos.y = y;
+		pos.x = x;
+		return true;
 	}
 	int enemiesKilled = 0; 
 
 	void ConsumePotion();
+	
 	void DamagePlayer(int damage);
 };
 

@@ -32,51 +32,101 @@ void MainManager::Play() {
 
 }
 
+void MainManager::DegradeAgility() {
+	player.agility--;
+	if (player.agility <= 0) {
+		player.agility = 3;
+		//RandomizeDungeon();
+	}
+}
+
 void MainManager::Dungeon() {
 	char userAction;
-
+	bool firstTime;
 	printf("  ------ DUNGEON ------\n\n");
 	printf("E -> Enemy    |   P -> Player   |    C -> Chest\n\n");
 	printf("Health: %d / %d\n", player.health, player.maxHealth);
 	printf("Potions: %d / 3\n", player.potions);
 	printf("Moves: %d / 3\n", player.agility);
-	RenderDungeon();
+
+	if (player.agility == 3) {
+		firstTime = true;
+	}
+	else {
+		firstTime = false;
+	}
+
+	//printf("Position: %d, %d \n", player.pos.x, player.pos.y);
+	CreateDungeon(player, enemies, chests, firstTime);
 
 	printf("__________________________\n\n");
 	printf("W A S D -> Move\n");
 	printf("P -> Potion\n\n");
 	printf("Enter your action: \n\n");
 	scanf_s(" %c", &userAction);
-	system("CLS");
+
 	switch (userAction) {
 	case 'P':
 		player.ConsumePotion();
 		break;
 	case 'W':
+		if (player.position(player.pos.x, player.pos.y - 1)) 
+			DegradeAgility();
 		break;
 	case 'A':
+		if(player.position(player.pos.x - 1, player.pos.y))
+			DegradeAgility();
 		break;
 	case 'S':
+		if(player.position(player.pos.x, player.pos.y + 1))
+			DegradeAgility();
 		break;
 	case 'D':
+		if(player.position(player.pos.x + 1, player.pos.y))
+			DegradeAgility();
 		break;
 	case 'p':
 		player.ConsumePotion();
 		break;
 	case 'w':
+		if(player.position(player.pos.x, player.pos.y - 1))
+			DegradeAgility();
 		break;
 	case 'a':
+		if(player.position(player.pos.x - 1, player.pos.y))
+			DegradeAgility();
 		break;
 	case 's':
+		if(player.position(player.pos.x, player.pos.y + 1))
+			DegradeAgility();
 		break;
 	case 'd':
+		if(player.position(player.pos.x + 1, player.pos.y))
+			DegradeAgility();
 		break;
 	}
-	
+	for (int i = 0; i < 7; i++)
+	{
+		if (player.pos.x == enemies[i].pos.x && player.pos.y == enemies[i].pos.y) {
+			//printf("Comienza batalla: %d, %d, %d", i, enemies[i].pos.x, enemies[i].pos.y);
+			if (enemies[i].isDead == false) {
+				printf("Aqui hay un enemigo no muerto\n");
+				//state = GameState::BATTLE;
+				//Battle();
+			}
+			else {
+				printf("Aqui hay un enemigo muerto\n");
+			}
+		}
+	}
+	//system("CLS");
 
 }
 
 void MainManager::Battle() {
+	printf("OH NO OH NOO OH NONONONONONONONONO, BATALLA\n");
+	char userSel;
+	scanf_s(" &c", &userSel);
 
 	if (player.health <= 0) {
 		state = GameState::GAMEOVER;
@@ -96,3 +146,4 @@ void MainManager::GameOver() {
 void MainManager::Boss() {
 
 }
+

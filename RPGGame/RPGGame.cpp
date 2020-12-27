@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Dungeon.h"
 #include "Enemy.h"
+
 #include "MainManager.h"
 
 
@@ -17,18 +18,10 @@ int main() {
 	
 
 	srand(time(NULL));
-
-
-	Player player;
-	InitializePlayer(player);
-
-	bool gameRunning = true;
 	
-	//RenderDungeon();
 	MainManager mm;
 	mm.Start();
 
 	return 0;
-
 
 }

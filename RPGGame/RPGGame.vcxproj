@@ -141,12 +141,14 @@
   <ItemGroup>
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Items.cpp" />
     <ClCompile Include="MainManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RPGGame.cpp" />
     <ClCompile Include="types.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chest.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Items.h" />

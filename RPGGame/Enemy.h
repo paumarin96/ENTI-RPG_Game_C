@@ -12,3 +12,5 @@ struct Enemy {
 		pos.y = y;
 	}
 };
+
+void InitializeEnemy(Enemy& enemy);
