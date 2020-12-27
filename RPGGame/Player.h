@@ -32,6 +32,7 @@ struct Player {
 		pos.x = x;
 		return true;
 	}
+
 	int enemiesKilled = 0; 
 
 	void ConsumePotion();

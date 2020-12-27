@@ -3,7 +3,7 @@
 
 void InitializePlayer(Player& p) {
 	
-	p.position(2,3);
+	p.position(3,2);
 	p.stamina = 90 + rand() % 21;
 	p.health = 90 + rand() % 21;
 	p.maxHealth = p.health;

@@ -13,4 +13,4 @@ struct Enemy {
 	}
 };
 
-void InitializeEnemy(Enemy& enemy);
+Enemy GenerateEnemy();

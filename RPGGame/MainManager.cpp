@@ -67,46 +67,31 @@ void MainManager::Dungeon() {
 
 	switch (userAction) {
 	case 'P':
-		player.ConsumePotion();
-		break;
-	case 'W':
-		if (player.position(player.pos.x, player.pos.y - 1)) 
-			DegradeAgility();
-		break;
-	case 'A':
-		if(player.position(player.pos.x - 1, player.pos.y))
-			DegradeAgility();
-		break;
-	case 'S':
-		if(player.position(player.pos.x, player.pos.y + 1))
-			DegradeAgility();
-		break;
-	case 'D':
-		if(player.position(player.pos.x + 1, player.pos.y))
-			DegradeAgility();
-		break;
 	case 'p':
 		player.ConsumePotion();
 		break;
+	case 'W':
 	case 'w':
+		if (player.position(player.pos.x - 1, player.pos.y)) 
+			DegradeAgility();
+		break;
+	case 'A':
+	case 'a':
 		if(player.position(player.pos.x, player.pos.y - 1))
 			DegradeAgility();
 		break;
-	case 'a':
-		if(player.position(player.pos.x - 1, player.pos.y))
-			DegradeAgility();
-		break;
+	case 'S':
 	case 's':
-		if(player.position(player.pos.x, player.pos.y + 1))
-			DegradeAgility();
-		break;
-	case 'd':
 		if(player.position(player.pos.x + 1, player.pos.y))
 			DegradeAgility();
 		break;
+	case 'D':
+	case 'd':
+		if(player.position(player.pos.x, player.pos.y + 1))
+			DegradeAgility();
+		break;
 	}
-	for (int i = 0; i < 7; i++)
-	{
+	for (int i = 0; i < 7; i++) {
 		if (player.pos.x == enemies[i].pos.x && player.pos.y == enemies[i].pos.y) {
 			//printf("Comienza batalla: %d, %d, %d", i, enemies[i].pos.x, enemies[i].pos.y);
 			if (enemies[i].isDead == false) {

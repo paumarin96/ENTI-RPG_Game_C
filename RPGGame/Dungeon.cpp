@@ -3,38 +3,22 @@
 
 
 
-void CreateDungeon(Player pl, Enemy enemies[7], Chest chests[2], bool firstTime) {
+void CreateDungeon(Player pl, Enemy enemies[], Chest chests[], bool firstTime) {
 	char map[MAP_SIZE][MAP_SIZE] = { {' ', ' ', ' ',' ',' '},
 									   {' ', ' ', ' ',' ',' '},
 									   {' ', ' ', ' ',' ',' '},
 									   {' ', ' ', ' ',' ',' '},
 									   {' ', ' ', ' ',' ',' '}, };
-	map[pl.pos.y][pl.pos.x] = 'P';
+	map[pl.pos.x][pl.pos.y] = 'P';
 
 	for (int i = 0; i < 7; i++)	{
-		//printf(" %d: Enemy inicial Pos: %d, %d\n", i, enemies[i].pos.x, enemies[i].pos.y);
 		if (enemies[i].isDead == false) {
 			if (map[enemies[i].pos.x][enemies[i].pos.y] == ' ') {
 				map[enemies[i].pos.x][enemies[i].pos.y] = 'E';
-			//printf(" %d: Enemy Pos: %d, %d\n", i, enemies[i].pos.x, enemies[i].pos.y);
-
 			} 
-			else if (firstTime){
-				while (true) {
-					enemies[i].pos.x = rand() % 5;
-					enemies[i].pos.y = rand() % 5;
-					if (map[enemies[i].pos.x][enemies[i].pos.y] == ' ') {
-						map[enemies[i].pos.x][enemies[i].pos.y] = 'E';
-						//printf(" %d: 2Enemy Pos: %d, %d\n", i, enemies[i].pos.x, enemies[i].pos.y);
-				
-						break;
-					}
-				}
-			}
-	
 		}
-	
 	}
+
 	for (int i = 0; i < 2; i++) {
 		if (map[chests[i].pos.x][chests[i].pos.y] == ' ') {
 			map[chests[i].pos.x][chests[i].pos.y] = 'C';
