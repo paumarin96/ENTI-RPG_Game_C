@@ -93,18 +93,27 @@ void MainManager::Dungeon() {
 	}
 	for (int i = 0; i < 7; i++) {
 		if (player.pos.x == enemies[i].pos.x && player.pos.y == enemies[i].pos.y) {
-			//printf("Comienza batalla: %d, %d, %d", i, enemies[i].pos.x, enemies[i].pos.y);
+			
 			if (enemies[i].isDead == false) {
-				printf("Aqui hay un enemigo no muerto\n");
-				//state = GameState::BATTLE;
-				//Battle();
-			}
-			else {
-				printf("Aqui hay un enemigo muerto\n");
+				system("CLS");
+				state = GameState::BATTLE;
+				Battle();
+
 			}
 		}
 	}
-	//system("CLS");
+	for (int i = 0; i < 2; i++) {
+		if (player.pos.x == chests[i].pos.x && player.pos.y == chests[i].pos.y) {
+
+			if (chests[i].isLooted == false) {
+				system("CLS");
+				state = GameState::CHEST;
+				OpenChest();
+
+			}
+		}
+	}
+	system("CLS");
 
 }
 
@@ -120,8 +129,12 @@ void MainManager::Battle() {
 	}
 }
 
-void MainManager::Chest() {
-
+void MainManager::OpenChest(Chest chest) {
+	printf("------ CHEST ------");
+	printf(" > You open the fucking chest: \n");
+	printf("	> %d gold!", chest.gold);
+	printf("	> The Chest contains fucking Gear!\n");
+	printf("			> ");
 }
 
 void MainManager::GameOver() {

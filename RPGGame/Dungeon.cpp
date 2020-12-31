@@ -22,24 +22,9 @@ void CreateDungeon(Player pl, Enemy enemies[], Chest chests[], bool firstTime) {
 	for (int i = 0; i < 2; i++) {
 		if (map[chests[i].pos.x][chests[i].pos.y] == ' ') {
 			map[chests[i].pos.x][chests[i].pos.y] = 'C';
-			//printf(" %d: Enemy Pos: %d, %d\n", i, enemies[i].pos.x, enemies[i].pos.y);
-		}
-		else if(firstTime) {
-			while (true) {
-				chests[i].pos.x = rand() % 5;
-				chests[i].pos.y = rand() % 5;
-				if (map[chests[i].pos.x][chests[i].pos.y] == ' ') {
-					map[chests[i].pos.x][chests[i].pos.y] = 'C';
-					//printf(" %d: 2Enemy Pos: %d, %d\n", i, enemies[i].pos.x, enemies[i].pos.y);
-
-					break;
-				}
-			}
 		}
 	}
 	
-	
-
 	RenderDungeon(pl, map);
 }
 

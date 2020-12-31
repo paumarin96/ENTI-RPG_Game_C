@@ -38,19 +38,41 @@ struct MainManager {
 		} while (j < 7);
 	}
 
+	void AddChest() {
+
+		int i = 0;
+		do {
+			Chest generatedChest;
+			generatedChest = generateChest();
+			bool chestExists = false;
+			for (int j = 0; j < 7; j++) {
+				if (enemies[j].pos.x == generatedChest.pos.x && enemies[j].pos.y == generatedChest.pos.y) {
+					for (int l = 0; l < 2; l++) {
+						if (chests[l].pos.x == generatedChest.pos.x && chests[l].pos.y == generatedChest.pos.y || player.pos.x == generatedChest.pos.x && player.pos.y == generatedChest.pos.y) {
+							chestExists = true;
+						}
+					}
+				}
+			}
+			if (!chestExists) {
+				chests[i] = generatedChest;
+				printf("he entrado 4\n");
+				i++;
+			}
+		} while (i < 2);
+	}
+
 	void Start() { //Executes one time
 		//Generate world
 		InitializePlayer(player);
 		int a = rand() % 3;
-		AddEnemies();
+		AddEnemies(); 
+		AddChest();
 		for (int i = 0; i <= a; i++) {
 			if (i == 0) {
 				continue;
 			}
 			enemies[i].isDead = true;
-		}
-		for (int i = 0; i < 2; i++) {
-			chests[i].InitializeChest();
 		}
 		state = GameState::DUNGEON;
 		Play();
@@ -65,7 +87,7 @@ struct MainManager {
 
 	void Battle();
 	
-	void Chest();
+	void OpenChest(int gold);
 
 	void GameOver();
 
