@@ -20,7 +20,8 @@ void CreateDungeon(Player pl, Enemy enemies[], Chest chests[], bool firstTime) {
 	}
 
 	for (int i = 0; i < 2; i++) {
-		if (map[chests[i].pos.x][chests[i].pos.y] == ' ') {
+	
+		if (map[chests[i].pos.x][chests[i].pos.y] == ' ' && chests[i].isLooted == false) {
 			map[chests[i].pos.x][chests[i].pos.y] = 'C';
 		}
 	}

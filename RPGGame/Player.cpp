@@ -7,6 +7,8 @@ void InitializePlayer(Player& p) {
 	p.stamina = 90 + rand() % 21;
 	p.health = 90 + rand() % 21;
 	p.maxHealth = p.health;
+	p.maxStamina = p.stamina;
+
 	
 }
 

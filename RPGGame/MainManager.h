@@ -10,7 +10,7 @@ struct MainManager {
 	Player player;
 	
 	Enemy enemies[7];
-
+	int deadEnemies; 
 	Chest chests[2];
 	
 	//spawnear enemigos muertos
@@ -31,6 +31,11 @@ struct MainManager {
 					enemyExists = true;
 				}
 			}
+			for (int l = 0; l < 2; l++) {
+				if (chests[l].pos.x == generatedEnemy.pos.x && chests[l].pos.y == generatedEnemy.pos.y) {
+					enemyExists = true;
+				}
+			}
 			if (!enemyExists) {
 				enemies[j] = generatedEnemy;
 				j++;
@@ -45,18 +50,13 @@ struct MainManager {
 			Chest generatedChest;
 			generatedChest = generateChest();
 			bool chestExists = false;
-			for (int j = 0; j < 7; j++) {
-				if (enemies[j].pos.x == generatedChest.pos.x && enemies[j].pos.y == generatedChest.pos.y) {
-					for (int l = 0; l < 2; l++) {
-						if (chests[l].pos.x == generatedChest.pos.x && chests[l].pos.y == generatedChest.pos.y || player.pos.x == generatedChest.pos.x && player.pos.y == generatedChest.pos.y) {
-							chestExists = true;
-						}
-					}
+			for (int l = 0; l < 2; l++) {
+				if (chests[l].pos.x == generatedChest.pos.x && chests[l].pos.y == generatedChest.pos.y || player.pos.x == generatedChest.pos.x && player.pos.y == generatedChest.pos.y) {
+					chestExists = true;
 				}
 			}
 			if (!chestExists) {
 				chests[i] = generatedChest;
-				printf("he entrado 4\n");
 				i++;
 			}
 		} while (i < 2);
@@ -66,8 +66,10 @@ struct MainManager {
 		//Generate world
 		InitializePlayer(player);
 		int a = rand() % 3;
-		AddEnemies(); 
+		deadEnemies = a;
 		AddChest();
+		AddEnemies(); 
+	
 		for (int i = 0; i <= a; i++) {
 			if (i == 0) {
 				continue;
@@ -85,9 +87,9 @@ struct MainManager {
 
 	void Dungeon();
 
-	void Battle();
+	void Battle(Enemy &enemy);
 	
-	void OpenChest(int gold);
+	void OpenChest(Chest chest);
 
 	void GameOver();
 

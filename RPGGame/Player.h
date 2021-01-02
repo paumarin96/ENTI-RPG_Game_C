@@ -11,8 +11,10 @@ struct Player {
 	int maxHealth;
 
 	int stamina;
+	int maxStamina;
 
 	int agility = 3;
+	int maxAgility = 3;
 	
 
 	int potions = 3;
