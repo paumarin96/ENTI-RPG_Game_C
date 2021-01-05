@@ -163,7 +163,7 @@ Item items[19] = { RichardsHatred, SwiftBoots, WhitePowder, RadevMug, RavenFeath
 
 Chest generateChest() {
 	Chest chest;
-	int m = rand() % 21;
+	int m = rand() % 20;
 	chest.gear = items[m];
 	chest.gold = (50 + rand() % 151);
 	int num = rand() % 101;

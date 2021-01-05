@@ -28,9 +28,8 @@ void Player::ConsumePotion() {
 
 
 void Player::DamagePlayer(int damage) {
-	//Au duele
-	//igual pipo muere.
 
 	health -= damage;
+	//codifo si mueres
 	
 }

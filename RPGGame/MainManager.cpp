@@ -44,10 +44,13 @@ void MainManager::Play() {
 }
 
 void MainManager::DegradeAgility() {
+
 	player.agility--;
+
 	if (player.agility <= 0) {
 		player.agility = player.maxAgility;
 		//RandomizeDungeon();
+
 		AddEnemies();
 		for (int i = 0; i <= deadEnemies; i++) {
 			if (i == 0) {
@@ -80,46 +83,71 @@ void MainManager::Dungeon() {
 	printf("__________________________\n\n");
 	printf("W A S D -> Move\n");
 	printf("P -> Potion\n\n");
-	printf("Enter your action: \n\n");
-	scanf_s(" %c", &userAction);
+	bool actionIsValid = false;
+	
+		printf("Enter your action: \n\n");
+		scanf_s(" %c", &userAction);
 
-	switch (userAction) {
-	case 'P':
-	case 'p':
-		player.ConsumePotion();
-		break;
-	case 'W':
-	case 'w':
-		if (player.position(player.pos.x - 1, player.pos.y)) 
-			DegradeAgility();
-		break;
-	case 'A':
-	case 'a':
-		if(player.position(player.pos.x, player.pos.y - 1))
-			DegradeAgility();
-		break;
-	case 'S':
-	case 's':
-		if(player.position(player.pos.x + 1, player.pos.y))
-			DegradeAgility();
-		break;
-	case 'D':
-	case 'd':
-		if(player.position(player.pos.x, player.pos.y + 1))
-			DegradeAgility();
-		break;
-	}
-	for (int i = 0; i < 7; i++) {
-		if (player.pos.x == enemies[i].pos.x && player.pos.y == enemies[i].pos.y) {
+		switch (userAction) {
+		case 'P':
+		case 'p':
+			printf("You consume a potion!\n");
+			player.ConsumePotion();
+
+			break;
+		case 'W':
+		case 'w':
+			if (player.position(player.pos.x - 1, player.pos.y))
 			
-			if (enemies[i].isDead == false) {
-				system("CLS");
-				state = GameState::BATTLE;
-				Battle(enemies[i]);
 
-			}
+			break;
+		case 'A':
+		case 'a':
+			if (player.position(player.pos.x, player.pos.y - 1))
+
+	
+			break;
+		case 'S':
+		case 's':
+			if (player.position(player.pos.x + 1, player.pos.y))
+	
+		
+			break;
+		case 'D':
+		case 'd':
+			if (player.position(player.pos.x, player.pos.y + 1))
+	
+		
+			break;
+
 		}
-	}
+		bool isThereEnemy = false;
+		for (int i = 0; i < 7; i++) {
+			if (player.pos.x == enemies[i].pos.x && player.pos.y == enemies[i].pos.y) {
+
+				if (enemies[i].isDead == false) {
+					isThereEnemy = true;
+					system("CLS");
+					state = GameState::BATTLE;
+					Battle(enemies[i]);
+				
+				}
+				else {
+				
+					isThereEnemy = false;
+				}
+			}
+			else {
+			
+				isThereEnemy = false;
+			}
+
+		}
+		if (!isThereEnemy) {
+			DegradeAgility();
+		}
+
+
 	for (int i = 0; i < 2; i++) {
 		if (player.pos.x == chests[i].pos.x && player.pos.y == chests[i].pos.y) {
 
@@ -136,11 +164,27 @@ void MainManager::Dungeon() {
 
 }
 
+char EnemyAI(Enemy enemy) {
+
+	if (enemy.health < Percentage(enemy.maxHealth, 30) && enemy.stamina < Percentage(enemy.maxStamina, 30)) {
+		return 'D';
+	}
+	else if (enemy.stamina < Percentage(enemy.maxStamina, 20)) {
+		return 'R';
+	}
+	else {
+		return 'A';
+	}
+}
 void MainManager::Battle(Enemy &enemy) {
 	system("CLS");
 	printf("------ COMBAT ------\n\n");
 	printf("-- Enemy --\n");
 	printf("[");
+	
+	if (player.stamina > player.maxStamina) {
+		player.stamina = player.maxStamina;
+	}
 
 	int enemyMaxHealth = enemy.maxHealth;
 	int enemyActualHealth = enemy.health;
@@ -184,7 +228,7 @@ void MainManager::Battle(Enemy &enemy) {
 		printf("=");
 	}
 
-	for (int i = 0; i < 10 - barritas; i++) {
+	for (int i = 0; i < 10 - barritasPlayer; i++) {
 		printf(" ");
 	}
 	printf("] %d / %d HP\n", player.health, player.maxHealth);
@@ -210,48 +254,131 @@ void MainManager::Battle(Enemy &enemy) {
 	printf("D -> Defend\n");
 	printf("R -> Rest\n");
 	printf("P -> Potion\n\n");
-	printf("Enter your action:");
+	printf("Enter your action: ");
 
 
 	char userSel;
-	int userSeal2;
-	//printf("Cuanto damage le quieres quitar\n");
+	int userSeal2; //para hacer feliz a mariona
+	char userSeal3;
+	char userSeal4;
 	scanf_s(" %c", &userSel);
 	printf("\n\n");
 
 	switch (userSel) {
 	case 'A':
 	case 'a':
-		printf("Enter your attack value (Max %d)", player.stamina);
-		 //para hacer feliz a mariona
-		scanf_s("%d", &userSeal2);
-		printf("You strike the enemy with more force! The enemy receives %d damage\n\n", userSeal2);
-		printf("Enter a character to update the fight... ");
-		
-		//IF (ENEMIGO MUERTO) --> The minion is no more :c 
-		//scanf_s("%c", &nom);
+		printf("Enter your attack value (Max %d): \n", player.stamina);
+		scanf_s("%d", &userSeal2);	 
 		break;
 	case 'D':
 	case 'd':
-
 		break;
 	case 'R':
 	case 'r':
-
 		break;
 	case 'P':
 	case 'p':
-
+		printf("You consume a potion!\n");
+		player.ConsumePotion();
 		break;
 
 	}
+	int attackDamage;
+	switch (EnemyAI(enemy)) {
+		case 'A':
+		case 'a': 
+
+			attackDamage = Percentage(enemy.maxStamina, 20) + Percentage(enemy.stamina - Percentage(enemy.maxStamina, 20), rand() % 101);
+
+			if (userSel == 'a' || userSel == 'A') {
+				if (attackDamage > userSeal2) {
+					printf("The enemy strikes harder! You recieve %d damage.\n\n", attackDamage);
+					player.DamagePlayer(attackDamage);
+					player.stamina -= userSeal2;
+					enemy.stamina -= attackDamage;
+				}
+				else if (userSeal2 >= attackDamage) {
+					printf("You strike the enemy with more force! The enemy receives %d damage.\n\n", userSeal2);
+					enemy.health -= userSeal2;
+					player.stamina -= userSeal2;
+					enemy.stamina -= attackDamage; 
+				}
+			}
+			else if (userSel == 'd' || userSel == 'D') {
+				printf("You defend the enemy blow, but receive %d damage.\n\n", Percentage(attackDamage,25));
+				enemy.stamina -= attackDamage;
+				player.DamagePlayer(Percentage(attackDamage, 25));
+				player.stamina += Percentage(player.maxStamina, 25);
+
+			}
+			else if (userSel == 'r' || userSel == 'R') {
+				printf("You rest when the enemy hits you, striking for %d damage.\n\n", attackDamage);
+				enemy.stamina -= attackDamage;
+				player.DamagePlayer(attackDamage);
+				player.stamina = player.maxStamina;
+			}
+			break;
+		case 'D':
+		case 'd':
+			if (userSel == 'a' || userSel == 'A') {
+				printf("You strike the enemy! The enemy defends but receives %d damage.\n\n", Percentage(userSeal2, 25));
+				enemy.health -= Percentage(userSeal2, 25);
+				enemy.stamina += Percentage(enemy.maxStamina, 25);
+				player.stamina -= userSeal2;
+			}
+			else if (userSel == 'd' || userSel == 'D') {
+				printf("You and the enemy defend. Nobody gets hurt :c\n\n");
+				enemy.stamina += Percentage(enemy.maxStamina, 25);
+				player.stamina += Percentage(player.maxStamina, 25);
+			}
+			else if (userSel == 'r' || userSel == 'R') {
+				printf("You rest while the enemy defends.\n\n");
+				enemy.stamina += Percentage(enemy.maxStamina, 25);
+				player.stamina += player.maxStamina;
+			}
+			break;
+		case 'R':
+		case 'r':
+			if (userSel == 'a' || userSel == 'A') {
+				printf("You strike the enemy! The enemy receives %d damage.\n\n", userSeal2);
+				enemy.health -= userSeal2;
+				enemy.stamina = enemy.maxStamina;
+				player.stamina -= userSeal2;
+			}
+			else if (userSel == 'd' || userSel == 'D') {
+				printf("You defend while the enemy catches a breath! It seems ready to strike!\n\n");
+				enemy.stamina = enemy.maxStamina;
+				player.stamina += Percentage(player.maxStamina, 25);
+			}
+			else if (userSel == 'r' || userSel == 'R') {
+				printf("You rest while the enemy catches a breath! It seems ready to strike!\n\n");
+				player.stamina += player.maxStamina;
+				enemy.stamina = enemy.maxStamina;
+			}
+			break;
+	}
+	printf("\nEnter a character to update the fight... ");
+	scanf_s(" %c", &userSeal3);
 
 	if (player.health <= 0) {
 		state = GameState::GAMEOVER;
 		gameOver = true;
 		GameOver();
 	}
+	if (enemy.health <= 0) {
+		printf("You have defeated the enemy!\n");
+		printf("\nEnter a character to go to the dungeon... ");
+
+		enemy.isDead = true;
+		deadEnemies++;
+		scanf_s(" %c", &userSeal4);
+		DegradeAgility();
+		state = GameState::DUNGEON;
+		Dungeon();
+	}
 }
+
+
 
 void MainManager::OpenChest(Chest chest) {
 	printf("------ CHEST ------\n\n");
@@ -259,12 +386,23 @@ void MainManager::OpenChest(Chest chest) {
 	printf("	> %d gold!\n", chest.gold);
 	printf("	> The Chest contains Gear!\n");
 	printf("			> %s\n", chest.gear.name);
-	printf("				- Gold: %d\n", chest.gear.gold);
-	printf("				- HP: %d\n", chest.gear.healthMod);
-	printf("				- Stamina: %d\n", chest.gear.staminaMod);
-	printf("				- Agility: %d\n", chest.gear.agilityMod);
+	if (chest.gear.gold != 0) {
+		printf("				- Gold: %d\n", chest.gear.gold);
+	}
+	if (chest.gear.healthMod != 0) {
+		printf("				- HP: %d\n", chest.gear.healthMod);
+	}
+	if (chest.gear.staminaMod != 0) {
+		printf("				- Stamina: %d\n", chest.gear.staminaMod);
+
+	}
+	if (chest.gear.agilityMod != 0) {
+		printf("				- Agility: %d\n", chest.gear.agilityMod);
+
+	}
+
 	if (chest.containsPotion == true) {
-		printf("	> The Chest contains a potion!\n");
+		printf("\n	> The Chest contains a potion!\n");
 		if (player.potions == 3) {
 			printf("		- You already have max potions\n");
 		}
@@ -272,10 +410,18 @@ void MainManager::OpenChest(Chest chest) {
 			player.potions++;
 		}
 	}
-
+	player.gold += chest.gold + chest.gear.gold;
+	if (player.gold <= 0) {
+		player.gold = 0;
+	}
 	player.maxHealth += chest.gear.healthMod;
 	if (player.health > player.maxHealth) {
 		player.health = player.maxHealth;
+	}
+	if (player.health <= 0) {
+		player.health = 0;
+		state = GameState::GAMEOVER;
+		GameOver();
 	}
 
 	player.maxStamina += chest.gear.staminaMod;
@@ -298,10 +444,17 @@ void MainManager::OpenChest(Chest chest) {
 }
 
 void MainManager::GameOver() {
+	system("CLS");
 	printf("\n\n\nYOU ARE DEAD. NO ONE WILL REMEMBER YOU. YOU WILL GO TO HELL WITH PIPO.\n\n\n");
+	printf("						Points: %d\n", player.gold);
 }
  
 void MainManager::Boss() {
 
 }
 
+
+int Percentage(int percentage, int number) {
+	int result = (int)(((float)number * (float)percentage)/100.f);
+	return result;
+}

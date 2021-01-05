@@ -98,3 +98,8 @@ struct MainManager {
 	
 };
 
+
+
+char EnemyAI(Enemy enemy);
+
+int Percentage(int percentage, int number);
