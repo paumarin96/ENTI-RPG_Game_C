@@ -130,7 +130,7 @@ void MainManager::Dungeon() {
 					system("CLS");
 					state = GameState::BATTLE;
 					Battle(enemies[i]);
-				
+					break;
 				}
 				else {
 				
@@ -249,6 +249,7 @@ void MainManager::Battle(Enemy &enemy) {
 	}
 	printf("] %d / %d Stamina\n\n", player.stamina, player.maxStamina);
 	printf("Potions %d / 3\n\n", player.potions);
+	printf("Agility: %d \n\n", player.agility);
 	printf("__________________________________________________________________________\n\n");
 	printf("A -> Attack\n");
 	printf("D -> Defend\n");

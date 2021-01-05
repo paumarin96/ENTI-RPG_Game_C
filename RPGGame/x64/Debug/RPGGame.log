@@ -3,18 +3,18 @@ C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(89,11): 
 C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(89,11): message : los marcadores de posición y sus parámetros esperan 2 argumentos variádicos, pero se proporcionaron 1
 C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(89,11): message : el argumento variádico 2 que falta es requerido por la cadena de formato '%c'
 C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(89,11): message : este argumento se utiliza como un tamaño de búfer
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(264,10): warning C4473: "scanf_s": no se pasaron suficientes argumentos para la cadena de formato
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(264,10): message : los marcadores de posición y sus parámetros esperan 2 argumentos variádicos, pero se proporcionaron 1
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(264,10): message : el argumento variádico 2 que falta es requerido por la cadena de formato '%c'
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(264,10): message : este argumento se utiliza como un tamaño de búfer
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(361,10): warning C4473: "scanf_s": no se pasaron suficientes argumentos para la cadena de formato
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(361,10): message : los marcadores de posición y sus parámetros esperan 2 argumentos variádicos, pero se proporcionaron 1
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(361,10): message : el argumento variádico 2 que falta es requerido por la cadena de formato '%c'
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(361,10): message : este argumento se utiliza como un tamaño de búfer
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(374,11): warning C4473: "scanf_s": no se pasaron suficientes argumentos para la cadena de formato
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(374,11): message : los marcadores de posición y sus parámetros esperan 2 argumentos variádicos, pero se proporcionaron 1
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(374,11): message : el argumento variádico 2 que falta es requerido por la cadena de formato '%c'
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(374,11): message : este argumento se utiliza como un tamaño de búfer
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(440,17): warning C4474: "scanf_s": se pasaron demasiados argumentos para la cadena de formato
-C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(440,17): message : los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(265,10): warning C4473: "scanf_s": no se pasaron suficientes argumentos para la cadena de formato
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(265,10): message : los marcadores de posición y sus parámetros esperan 2 argumentos variádicos, pero se proporcionaron 1
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(265,10): message : el argumento variádico 2 que falta es requerido por la cadena de formato '%c'
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(265,10): message : este argumento se utiliza como un tamaño de búfer
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(362,10): warning C4473: "scanf_s": no se pasaron suficientes argumentos para la cadena de formato
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(362,10): message : los marcadores de posición y sus parámetros esperan 2 argumentos variádicos, pero se proporcionaron 1
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(362,10): message : el argumento variádico 2 que falta es requerido por la cadena de formato '%c'
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(362,10): message : este argumento se utiliza como un tamaño de búfer
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(375,11): warning C4473: "scanf_s": no se pasaron suficientes argumentos para la cadena de formato
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(375,11): message : los marcadores de posición y sus parámetros esperan 2 argumentos variádicos, pero se proporcionaron 1
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(375,11): message : el argumento variádico 2 que falta es requerido por la cadena de formato '%c'
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(375,11): message : este argumento se utiliza como un tamaño de búfer
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(441,17): warning C4474: "scanf_s": se pasaron demasiados argumentos para la cadena de formato
+C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\RPGGame\MainManager.cpp(441,17): message : los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
   RPGGame.vcxproj -> C:\Users\ptsma\Documents\GitHub\ENTI-RPG_Game_C\x64\Debug\RPGGame.exe
