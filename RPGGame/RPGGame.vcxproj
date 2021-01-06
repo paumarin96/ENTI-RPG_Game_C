@@ -145,6 +145,7 @@
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="MainManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="radev.cpp" />
     <ClCompile Include="RPGGame.cpp" />
     <ClCompile Include="types.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="Items.h" />
     <ClInclude Include="MainManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="radev.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

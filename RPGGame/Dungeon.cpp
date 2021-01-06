@@ -30,23 +30,25 @@ void CreateDungeon(Player pl, Enemy enemies[], Chest chests[], bool firstTime) {
 }
 
 void RenderDungeon(Player pl, char theMap[][MAP_SIZE]) {
-
+	printf("			   ");
 	for (int i = 0; i < MAP_SIZE; i++) {
+	
 		printf(" ___ ");
 	}
 	printf("\n");
 
 	for (int i = 0; i < MAP_SIZE; i++) {
+		printf("			   ");
 		for (int j = 0; j < MAP_SIZE; j++) {
 			printf("|   |");
 		}
 		printf("\n");
-
+		printf("			   ");
 		for (int j = 0; j < MAP_SIZE; j++) {
 			printf("| %c |", theMap[i][j]);
 		}
 		printf("\n");
-
+		printf("			   ");
 		for (int j = 0; j < MAP_SIZE; j++) {
 			printf("|___|");
 		}

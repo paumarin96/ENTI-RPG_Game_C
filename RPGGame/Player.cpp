@@ -3,7 +3,8 @@
 
 void InitializePlayer(Player& p) {
 	
-	p.position(3,2);
+	p.pos.x = 3;
+	p.pos.y = 2;
 	p.stamina = 90 + rand() % 21;
 	p.health = 90 + rand() % 21;
 	p.maxHealth = p.health;
@@ -30,6 +31,5 @@ void Player::ConsumePotion() {
 void Player::DamagePlayer(int damage) {
 
 	health -= damage;
-	//codifo si mueres
 	
 }

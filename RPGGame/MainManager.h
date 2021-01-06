@@ -4,7 +4,8 @@
 #include "Player.h"
 #include <stdlib.h>
 #include "Chest.h"
-enum GameState { DUNGEON, BATTLE, CHEST, GAMEOVER, BOSS };
+#include "radev.h"
+enum GameState { DUNGEON, BATTLE, CHEST, GAMEOVER, BOSS, WIN, TITLE, STORY };
 
 struct MainManager {
 	Player player;
@@ -12,7 +13,10 @@ struct MainManager {
 	Enemy enemies[7];
 	int deadEnemies; 
 	Chest chests[2];
+	int openChests;
 	
+	Enemy radev;
+	bool actionIsValid = true;
 	//spawnear enemigos muertos
 
 	//Chest chests[];
@@ -69,14 +73,18 @@ struct MainManager {
 		deadEnemies = a;
 		AddChest();
 		AddEnemies(); 
-	
+		radev.maxHealth = 420;
+		radev.maxStamina = 138;
+		radev.health = 420;
+		radev.stamina = 69;
+
 		for (int i = 0; i <= a; i++) {
 			if (i == 0) {
 				continue;
 			}
 			enemies[i].isDead = true;
 		}
-		state = GameState::DUNGEON;
+		state = GameState::TITLE;
 		Play();
 	
 	}
@@ -93,9 +101,13 @@ struct MainManager {
 
 	void GameOver();
 
-	void Boss();
+	void Win();
+
+	void Boss(Enemy &radev);
 	
-	
+	void TitleScreen();
+
+	void Story();
 };
 
 

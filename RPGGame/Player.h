@@ -1,5 +1,6 @@
 #pragma once
 #include <stdlib.h>
+#include <stdio.h>
 #include "types.h"
 #include <time.h>
 
@@ -18,22 +19,6 @@ struct Player {
 	
 
 	int potions = 3;
-
-	bool position(int x, int y) {
-
-		if (x > 4 || x < 0) {
-			
-			return false;
-		} 
-		if (y > 4 || y < 0) {
-			
-			return false;
-		}
-
-		pos.y = y;
-		pos.x = x;
-		return true;
-	}
 
 	int enemiesKilled = 0; 
 
