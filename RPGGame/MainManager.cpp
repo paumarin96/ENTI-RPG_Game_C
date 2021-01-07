@@ -71,7 +71,7 @@ void MainManager::DegradeAgility() {
 
 void MainManager::Dungeon() {
 	system("CLS");
-	if(deadEnemies == 7 && openChests == 2){
+	if(deadEnemies >= 7 && openChests == 2){
 		Boss(radev);
 	}
 	char userAction = ' ';
@@ -130,7 +130,10 @@ void MainManager::Dungeon() {
 		case 'P':
 		case 'p':
 			printf("You consume a potion!\n");
-			player.ConsumePotion();
+			if (player.ConsumePotion()) {
+				canDegradeAgility = true;
+			}
+			
 
 			break;
 		case 'W':
@@ -177,7 +180,9 @@ void MainManager::Dungeon() {
 					system("CLS");
 					state = GameState::BATTLE;
 					Battle(enemies[i]);
-					break;
+					return;
+					//break;
+					
 				}
 				else {
 				
@@ -191,7 +196,7 @@ void MainManager::Dungeon() {
 
 		}
 		if (!isThereEnemy) {
-			if (userAction == 'A' || userAction == 'a' || userAction == 'W' || userAction == 'w' || userAction == 's' || userAction == 'S' || userAction == 'd' || userAction == 'D') {
+			if (userAction == 'A' || userAction == 'a' || userAction == 'W' || userAction == 'w' || userAction == 's' || userAction == 'S' || userAction == 'd' || userAction == 'D' || userAction == 'P' || userAction == 'p') {
 				if(canDegradeAgility)
 				DegradeAgility();
 			}
@@ -207,7 +212,7 @@ void MainManager::Dungeon() {
 				
 
 				OpenChest(chests[i]);
-				break;
+				return;
 
 			}
 		}
@@ -322,7 +327,7 @@ void MainManager::Battle(Enemy &enemy) {
 	if (actionIsValid == false) {
 		printf("Your action was invalid. \n");
 	}
-	printf("Enter your action: ");
+	printf("\nEnter your action: ");
 
 
 	char userSel;
@@ -343,7 +348,7 @@ void MainManager::Battle(Enemy &enemy) {
 	case 'a':
 		if (player.stamina == 0) {
 			printf("You can't attack if you have 0 stamina, you little dingus\n");
-			printf("Enter a character to update the fight...\n ");
+			printf("\nEnter a character to update the fight...\n ");
 			scanf_s(" %c", &userSeal3);
 			Battle(enemy);
 			break;
@@ -352,7 +357,7 @@ void MainManager::Battle(Enemy &enemy) {
 
 		scanf_s("%d", &userSeal2);	 
 		if (userSeal2 > player.stamina) {
-			printf("You can't attack with more than your current stamina!");
+			printf("You can't attack with more than your current stamina!\n");
 			printf("\nEnter a character to update the fight... ");
 			scanf_s(" %c", &userSeal3);
 			Battle(enemy);
@@ -454,17 +459,27 @@ void MainManager::Battle(Enemy &enemy) {
 		gameOver = true;
 		GameOver();
 	}
-	if (enemy.health <= 0) {
-		printf("You have defeated the enemy!\n");
-		printf("\nEnter a character to go to the dungeon... ");
+	else {
+		if (enemy.health <= 0) {
+			printf("You have defeated the enemy!\n");
+			printf("\nEnter a character to go to the dungeon... ");
 
-		enemy.isDead = true;
-		deadEnemies++;
-		scanf_s(" %c", &userSeal4);
-		DegradeAgility();
-		state = GameState::DUNGEON;
-		Dungeon();
+			enemy.isDead = true;
+			deadEnemies++;
+			scanf_s(" %c", &userSeal4);
+			DegradeAgility();
+			state = GameState::DUNGEON;
+			Dungeon();
+			return;
+		}
+		else {
+			state = GameState::BATTLE;
+			Battle(enemy);
+		}
+		
 	}
+
+
 }
 
 
@@ -527,10 +542,16 @@ void MainManager::OpenChest(Chest chest) {
 	if (player.stamina > player.maxStamina) {
 		player.stamina = player.maxStamina;
 	}
+	
 
-	player.maxAgility += chest.gear.agilityMod;
-	if (player.agility > player.maxAgility) {
-		player.agility = player.maxAgility;
+	if ((player.maxAgility += chest.gear.agilityMod) < 1) {
+		player.maxAgility = 1;
+	}
+	else {
+		player.maxAgility += chest.gear.agilityMod;
+		if (player.agility > player.maxAgility) {
+			player.agility = player.maxAgility;
+		}
 	}
 
 	char userSeal3; //Esta variable está maldita. Se bugeaba cuando se llama userSelection y con userSeal3 funciona xD.

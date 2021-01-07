@@ -22,7 +22,7 @@ struct Player {
 
 	int enemiesKilled = 0; 
 
-	void ConsumePotion();
+	bool ConsumePotion();
 	
 	void DamagePlayer(int damage);
 };

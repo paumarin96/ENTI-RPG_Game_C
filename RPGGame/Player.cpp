@@ -13,7 +13,7 @@ void InitializePlayer(Player& p) {
 	
 }
 
-void Player::ConsumePotion() {
+bool Player::ConsumePotion() {
 	
 	if (potions > 0) {
 		potions--;
@@ -22,8 +22,9 @@ void Player::ConsumePotion() {
 		if (health > maxHealth) {
 			health = maxHealth;
 		}
+		return true;
 	}
-	
+	return false;
 }
 
 
