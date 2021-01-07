@@ -16,7 +16,7 @@ void MainManager::Play() {
 
 					if (enemies[i].isDead == false) {
 						//system("CLS");
-						state = GameState::BATTLE;
+						
 						Battle(enemies[i]);
 
 					}
@@ -26,7 +26,7 @@ void MainManager::Play() {
 			break;
 
 		case CHEST:
-			Chest();
+		
 			break;
 
 		case GAMEOVER:
@@ -40,10 +40,9 @@ void MainManager::Play() {
 		case WIN:
 			break;
 		case TITLE:
-			TitleScreen();
+
 			break;
-		case STORY:
-			break;
+	
 		}
 		
 	
@@ -58,8 +57,11 @@ void MainManager::DegradeAgility() {
 	if (player.agility <= 0) {
 		player.agility = player.maxAgility;
 		//RandomizeDungeon();
-
-		AddEnemies();
+		if (deadEnemies < 7) {
+			AddEnemies();
+		}
+		
+	
 		for (int i = 0; i <= deadEnemies; i++) {
 			if (i == 0) {
 				continue;
@@ -71,8 +73,12 @@ void MainManager::DegradeAgility() {
 
 void MainManager::Dungeon() {
 	system("CLS");
+	//printf("deadEnemies: %d", deadEnemies);
+	//printf("deadEnemies: %d", openChests);
 	if(deadEnemies >= 7 && openChests == 2){
+		
 		Boss(radev);
+		return;
 	}
 	char userAction = ' ';
 	
@@ -116,7 +122,7 @@ void MainManager::Dungeon() {
 		printf("Enter your action: \n\n");
 		scanf_s(" %c", &userAction);
 		
-		if (userAction == 'A' || userAction == 'a' || userAction == 'W' || userAction == 'w' || userAction == 's' || userAction == 'S' || userAction == 'd' || userAction == 'D' || userAction == 'R') {
+		if (userAction == 'A' || userAction == 'a' || userAction == 'W' || userAction == 'w' || userAction == 's' || userAction == 'S' || userAction == 'd' || userAction == 'D' || userAction == 'R' || userAction == 'P' || userAction == 'p') {
 			actionIsValid = true;
 		}
 		else {
@@ -178,7 +184,7 @@ void MainManager::Dungeon() {
 				if (enemies[i].isDead == false) {
 					isThereEnemy = true;
 					system("CLS");
-					state = GameState::BATTLE;
+				
 					Battle(enemies[i]);
 					return;
 					//break;
@@ -234,6 +240,7 @@ char EnemyAI(Enemy enemy) {
 	}
 }
 void MainManager::Battle(Enemy &enemy) {
+	state = GameState::BATTLE;
 	system("CLS");
 	printf(R"EOF(
 			 __________         __    __  .__          
@@ -331,7 +338,7 @@ void MainManager::Battle(Enemy &enemy) {
 
 
 	char userSel;
-	int userSeal2; //para hacer feliz a mariona
+	int userSeal2 = 0; //para hacer feliz a mariona
 	char userSeal3;
 	char userSeal4;
 	scanf_s(" %c", &userSel);
@@ -350,18 +357,24 @@ void MainManager::Battle(Enemy &enemy) {
 			printf("You can't attack if you have 0 stamina, you little dingus\n");
 			printf("\nEnter a character to update the fight...\n ");
 			scanf_s(" %c", &userSeal3);
-			Battle(enemy);
-			break;
+			return;
 		}
 		printf("Enter your attack value (Max %d): \n", player.stamina);
 
-		scanf_s("%d", &userSeal2);	 
+		scanf_s("%d", &userSeal2);	
+
 		if (userSeal2 > player.stamina) {
 			printf("You can't attack with more than your current stamina!\n");
 			printf("\nEnter a character to update the fight... ");
 			scanf_s(" %c", &userSeal3);
-			Battle(enemy);
-			break;
+			return;
+		}
+
+		if (userSeal2 < 0) {
+			printf("You can't attack with a negative number, you little dingus!\n");
+			printf("\nEnter a character to update the fight... ");
+			scanf_s(" %c", &userSeal3);
+			return;
 		}
 		break;
 	case 'D':
@@ -455,9 +468,12 @@ void MainManager::Battle(Enemy &enemy) {
 	scanf_s(" %c", &userSeal3);
 
 	if (player.health <= 0) {
+	
 		state = GameState::GAMEOVER;
-		gameOver = true;
-		GameOver();
+	
+		return;
+		//GameOver();
+		
 	}
 	else {
 		if (enemy.health <= 0) {
@@ -469,12 +485,12 @@ void MainManager::Battle(Enemy &enemy) {
 			scanf_s(" %c", &userSeal4);
 			DegradeAgility();
 			state = GameState::DUNGEON;
-			Dungeon();
 			return;
 		}
 		else {
 			state = GameState::BATTLE;
-			Battle(enemy);
+			
+			return;
 		}
 		
 	}
@@ -535,7 +551,7 @@ void MainManager::OpenChest(Chest chest) {
 	if (player.health <= 0) {
 		player.health = 0;
 		state = GameState::GAMEOVER;
-		GameOver();
+
 	}
 
 	player.maxStamina += chest.gear.staminaMod;
@@ -543,15 +559,14 @@ void MainManager::OpenChest(Chest chest) {
 		player.stamina = player.maxStamina;
 	}
 	
-
-	if ((player.maxAgility += chest.gear.agilityMod) < 1) {
+	player.maxAgility += chest.gear.agilityMod;
+	if (player.maxAgility < 1) {
 		player.maxAgility = 1;
 	}
-	else {
-		player.maxAgility += chest.gear.agilityMod;
-		if (player.agility > player.maxAgility) {
+
+	if (player.agility > player.maxAgility) {
 			player.agility = player.maxAgility;
-		}
+		
 	}
 
 	char userSeal3; //Esta variable está maldita. Se bugeaba cuando se llama userSelection y con userSeal3 funciona xD.
@@ -583,7 +598,7 @@ void MainManager::GameOver() {
 }
  
 void MainManager::Boss(Enemy &radev) {
-
+	state = GameState::BOSS;
 	system("CLS");
 	radevBossImage();
 	printf("\n\n");
@@ -836,12 +851,10 @@ void MainManager::TitleScreen() {
 	printf("\n\n\n				     Enter a character to start.\n");
 	scanf_s(" %c", &userSeal0);
 	state = GameState::DUNGEON;
-	Dungeon();
+	Play();
 }
 
-void MainManager::Story() {
 
-}
 
 int Percentage(int percentage, int number) {
 	int result = (int)(((float)number * (float)percentage)/100.f);

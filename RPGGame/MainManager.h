@@ -11,9 +11,9 @@ struct MainManager {
 	Player player;
 	
 	Enemy enemies[7];
-	int deadEnemies; 
+	int deadEnemies = 0; 
 	Chest chests[2];
-	int openChests;
+	int openChests = 0;
 	
 	Enemy radev;
 	bool actionIsValid = true;
@@ -85,7 +85,7 @@ struct MainManager {
 			enemies[i].isDead = true;
 		}
 		state = GameState::TITLE;
-		Play();
+		TitleScreen();
 	
 	}
 
@@ -107,7 +107,7 @@ struct MainManager {
 	
 	void TitleScreen();
 
-	void Story();
+
 };
 
 
